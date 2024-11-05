@@ -3,6 +3,7 @@ import starlight from "@astrojs/starlight";
 
 // https://astro.build/config
 export default defineConfig({
+  base: "/notes-astro/",
   integrations: [
     starlight({
       title: "My Docs",
@@ -18,8 +19,12 @@ export default defineConfig({
           ],
         },
         {
-          label: "Notes",
+          label: "References",
           autogenerate: { directory: "reference" },
+        },
+        {
+          label: "Notes",
+          autogenerate: { directory: "notes" },
         },
       ],
     }),
