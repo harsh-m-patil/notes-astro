@@ -1,0 +1,189 @@
+---
+title: ExpressJS
+description: ExpressJS notes
+---
+
+
+> Fast, unopinionated, minimalist web framework for Node.js
+
+
+### Quick Start 
+
+---
+
+import { Steps } from '@astrojs/starlight/components';
+import { Code } from '@astrojs/starlight/components';
+import { Aside } from '@astrojs/starlight/components';
+
+export const helloWorldCode = `const express = require("express");
+const app = express();
+
+app.get("/",(req,res,next) => {
+  res.status(200).json({
+    message: "Hello World"
+  })
+})
+
+app.listen(3000,() => {
+  console.log("Listening at port 3000")
+})
+`
+export const routeMethods = `
+app.get("/",(req,res) => {
+  res.send("GET Request to home page");
+})
+
+app.post("/",(req,res) => {
+  res.send("POST req to home page");
+})
+
+app.all("*",(req,res) => {
+  res.status(404).send("404 Not Found");
+})
+`
+
+export const routeParamsCode = `
+app.get("/users/:userId/books:bookId",(req,res) => {
+  res.send(req.params);
+})
+`
+export const routeHandlers = `
+app.get("/",(req,res,next) => {
+  console.log("Function to check is user is authenticated");
+  //TODO: implement auth logic
+
+  // IMP to call next
+  next();
+},(req,res) => {
+  res.send("restricted content");
+});
+
+const c0 = (req,res,next) => {
+  console.log("First Callback");
+  next();
+}
+
+const c1 = (req,res,next) => {
+  console.log("Second Callback");
+  next();
+}
+
+const c2 = (req,res,next) => {
+  console.log("Third Callback");
+  next();
+}
+
+app.get("/",c0,c1);
+
+// Can pass array of callbacks
+app.get("/",[c0,c1,c2]);
+`
+
+export const expressRouter = `
+const express = require('express');
+const router = express.Router();
+
+router.route("/").get((req,res) => {
+  res.send("Users");
+})
+
+module.exports = router;
+`
+export const usingRouter = `
+const userRouter = require("./user.route.js");
+
+app.use("/users",userRouter);
+`
+
+
+<Steps>
+
+1. Create a npm project using npm init -y
+
+   ```bash
+   npm init -y
+   ```
+
+2. Install Express
+
+   ```bash
+   npm install express
+   ```
+
+3. Create a index.js file
+
+    <Code lang="js" code={helloWorldCode} title="index.js"/>
+
+4. Run the server
+
+    ```bash
+    node index.js
+    ```
+</Steps>
+
+---
+---
+
+### Routing
+
+---
+
+#### Basic Route
+
+<Code code={helloWorldCode} lang="js"/>
+
+#### Route Methods
+
+<Code code={routeMethods} lang="js"/>
+
+> For full methods [here](https://expressjs.com/en/4x/api.html#app.METHOD)
+
+#### Route Parameters
+  
+<br/>
+> Route parameters are named URL segments that are used to capture the values specified at their position in the URL. The captured values are populated in the req.params object, with the name of the route parameter specified in the path as their respective keys.
+<br/>
+
+<Code code={routeParamsCode} lang="js"/>
+
+<Aside type="caution">The name of route parameters must be made up of “word characters” ([A-Za-z0-9_]).</Aside>
+
+#### Route Handlers
+> The callbacks we pass to the router method functions
+<br/>
+We can pass functions or array of functions as callbacks.  
+
+<Code code={routeHandlers} lang="js"/>
+<Aside>Don't forget to call the next function</Aside>
+
+---
+
+#### Response Methods 
+
+Methods available on the response object
+
+| Method             | Description                                                                           |
+| ------------------ | ------------------------------------------------------------------------------------- |
+| `res.download()`   | Prompt a file to be downloaded.                                                       |
+| `res.end()`        | End the response process.                                                             |
+| `res.json()`       | Send a JSON response.                                                                 |
+| `res.jsonp()`      | Send a JSON response with JSONP support.                                              |
+| `res.redirect()`   | Redirect a request.                                                                   |
+| `res.render()`     | Render a view template.                                                               |
+| `res.send()`       | Send a response of various types.                                                     |
+| `res.sendFile()`   | Send a file as an octet stream.                                                       |
+| `res.sendStatus()` | Set the response status code and send its string representation as the response body. |
+
+---
+
+#### Express Router
+
+Use the `express.Router` class to create modular, mountable route handlers. A Router instance is a complete middleware and routing system; for this reason, it is often referred to as a “mini-app”.
+
+- Creating a Router  
+
+<Code lang="js" code={expressRouter} title="user.routes.js"/>
+
+- Using it in your express app
+<Code lang="js" code={usingRouter} title="index.js"/>
+---

@@ -27,7 +27,8 @@ rick.save().then(() => console.log("Never Gonna Give You Up"));
 
 ### Defining a Schema
 
-Schemas define the structure and data types of documents. You can also add schema methods, statics, and virtuals.
+Schemas define the structure and data types of documents. You can also add
+schema methods, statics, and virtuals.
 
 ```js
 const { Schema } = require("mongoose");
@@ -48,7 +49,8 @@ blogSchema.add({ views: Number });
 
 ### Schema Validation
 
-Schemas support validation rules, such as required fields, length constraints, and custom validators.
+Schemas support validation rules, such as required fields, length constraints,
+and custom validators.
 
 ```js
 const schema = new Schema({
@@ -106,9 +108,11 @@ const schema = new Schema({
 
 ### Middleware
 
-Middleware functions in Mongoose are executed during the document lifecycle, like on save or query.
+Middleware functions in Mongoose are executed during the document lifecycle,
+like on save or query.
 
-- **Pre and Post Middleware**: Useful for operations like hashing passwords before saving.
+- **Pre and Post Middleware**: Useful for operations like hashing passwords
+  before saving.
 
   ```js
   const schema = new Schema({ name: String });
@@ -125,7 +129,8 @@ Middleware functions in Mongoose are executed during the document lifecycle, lik
   });
   ```
 
-- **Query Middleware**: Execute middleware on query actions, such as finding documents.
+- **Query Middleware**: Execute middleware on query actions, such as finding
+  documents.
 
   ```js
   schema.pre(/^find/, function (next) {
@@ -136,7 +141,8 @@ Middleware functions in Mongoose are executed during the document lifecycle, lik
 
 ### Aggregation Pipeline
 
-Use the aggregation pipeline for complex data transformations, filtering, grouping, and statistics:
+Use the aggregation pipeline for complex data transformations, filtering,
+grouping, and statistics:
 
 ```js
 db.products.aggregate([
@@ -149,7 +155,8 @@ db.products.aggregate([
 
 ### Virtuals
 
-Virtuals are fields you define that don’t get persisted to MongoDB. They can be used to derive values, like a full name from first and last names.
+Virtuals are fields you define that don’t get persisted to MongoDB. They can be
+used to derive values, like a full name from first and last names.
 
 ```js
 const userSchema = new Schema({
@@ -164,7 +171,8 @@ userSchema.virtual("fullName").get(function () {
 
 #### Virtual Populate
 
-Virtual populates let you reference documents in other collections without storing them as actual fields.
+Virtual populates let you reference documents in other collections without
+storing them as actual fields.
 
 ```js
 const userSchema = new Schema({
@@ -182,7 +190,8 @@ userSchema.virtual("postCount", {
 
 ### Indexing
 
-Indexes optimize query performance. Adding indexes on frequently queried fields can greatly speed up read operations.
+Indexes optimize query performance. Adding indexes on frequently queried fields
+can greatly speed up read operations.
 
 ```js
 // Single-field index

@@ -5,7 +5,8 @@ description: Ways to secure your express app from common attacks
 
 ### 1. Rate Limiting
 
-To prevent abuse and limit the number of requests a client can make to the server within a specified time window.
+To prevent abuse and limit the number of requests a client can make to the
+server within a specified time window.
 
 ```js
 const rateLimit = require("express-rate-limit");
@@ -23,7 +24,8 @@ app.use("/api", limiter); // Apply rate limiting to all `/api` routes
 
 ### 2. Limit Body Payload Size
 
-To prevent large payload attacks, limit the size of incoming JSON request bodies.
+To prevent large payload attacks, limit the size of incoming JSON request
+bodies.
 
 ```js
 const express = require("express");
@@ -47,7 +49,8 @@ app.use(xss()); // Clean user input in all requests
 
 ### 4. Secure HTTP Headers
 
-Use `helmet` to set various HTTP headers that enhance security, like `Content-Security-Policy`, `X-Frame-Options`, and more.
+Use `helmet` to set various HTTP headers that enhance security, like
+`Content-Security-Policy`, `X-Frame-Options`, and more.
 
 ```js
 const helmet = require("helmet");
@@ -57,7 +60,8 @@ app.use(helmet()); // Apply secure headers to all routes
 
 ### 5. NoSQL Injection Protection
 
-Use `mongoSanitize` to remove `$` and `.` operators in query inputs, preventing NoSQL injection attacks in MongoDB.
+Use `mongoSanitize` to remove `$` and `.` operators in query inputs, preventing
+NoSQL injection attacks in MongoDB.
 
 ```js
 const mongoSanitize = require("express-mongo-sanitize");
@@ -67,7 +71,8 @@ app.use(mongoSanitize()); // Sanitize data to prevent NoSQL injection
 
 ### 6. HTTP Parameter Pollution (HPP) Prevention
 
-Prevent parameter pollution by only allowing listed parameters to be repeated in the query string.
+Prevent parameter pollution by only allowing listed parameters to be repeated in
+the query string.
 
 ```js
 const hpp = require("hpp");
