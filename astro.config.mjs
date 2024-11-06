@@ -12,19 +12,23 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: "Guides",
-          items: [
-            // Each item here is one entry in the navigation menu.
-            { label: "Example Guide", slug: "guides/example" },
-          ],
+          label: "Notes",
+          autogenerate: { directory: "notes" },
         },
+        {
+          label: "MERN Stack",
+          autogenerate: { directory: "MERN Stack" },
+        },
+        //{
+        //  label: "Guides",
+        //  items: [
+        //    // Each item here is one entry in the navigation menu.
+        //    { label: "Example Guide", slug: "guides" },
+        //  ],
+        //},
         {
           label: "References",
           autogenerate: { directory: "reference" },
-        },
-        {
-          label: "Notes",
-          autogenerate: { directory: "notes" },
         },
       ],
     }),
